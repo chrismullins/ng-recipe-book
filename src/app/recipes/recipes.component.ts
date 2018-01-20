@@ -7,12 +7,12 @@ import {Recipe} from './recipe.model';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
-  recipeInDetail: Recipe;
+  selectedRecipe: Recipe;
 
-  onDetailRecipeChanged($event) {
-    // console.log($event);
-    this.recipeInDetail = $event;
-  }
+  // onDetailRecipeChanged($event) {
+  //   console.log($event);
+    // this.selectedRecipe = $event;
+  // }
 
   constructor() { }
 
