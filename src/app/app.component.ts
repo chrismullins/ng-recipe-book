@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ export class AppComponent {
   title = 'app';
   loadedFeature = 'recipe';
 
-  onNavigate(feature:string) {
-    this.loadedFeature = feature;
+  onNavigate(feature: string) {
+    // this.router.navigate([feature]);
+    // this.loadedFeature = feature;
   }
+
+  constructor(private router: Router) {}
 }
