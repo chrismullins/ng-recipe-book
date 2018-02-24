@@ -3,6 +3,9 @@ import {Recipe} from './recipes/recipe.model';
 import {Ingredient} from './shared/ingredient.model';
 import {ShoppingListService} from './shopping-list.service';
 import {Subject} from 'rxjs/Subject';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Injectable()
 export class RecipeService {
@@ -59,6 +62,24 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  // saveRecipes(): Observable<any> {
+  //   // this.http.put('https://ng-recipe-book-b0c9e.firebaseio.com/data.json', this.recipes).map(
+  //   //   (response: Response) => {
+  //   //     return response.json();
+  //   //   }
+  //   // ).catch(
+  //   //   (error: Response) => {
+  //   //     return Observable.throw('Something went wrong');
+  //   //   }
+  //   // );
+  //   return this.http.put('https://ng-recipe-book-b0c9e.firebaseio.com/data.json', this.recipes);
+  // }
+
+  constructor(private shoppingListService: ShoppingListService, private http: Http) { }
 
 }
