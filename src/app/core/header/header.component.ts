@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
-              private authService: AuthService) { }
+              public authService: AuthService) { }
 
   onSaveData() {
     this.dataStorageService.storeRecipes().subscribe(
