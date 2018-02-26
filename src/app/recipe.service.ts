@@ -80,6 +80,6 @@ export class RecipeService {
   //   return this.http.put('https://ng-recipe-book-b0c9e.firebaseio.com/data.json', this.recipes);
   // }
 
-  constructor(private shoppingListService: ShoppingListService, private http: Http) { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
 }
