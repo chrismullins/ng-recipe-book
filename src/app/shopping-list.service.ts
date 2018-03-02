@@ -7,10 +7,11 @@ export class ShoppingListService {
   // ingredientsChanged = new EventEmitter<Ingredient[]>();
   startedEditing = new Subject<number>();
   ingredientsChanged = new Subject<Ingredient[]>();
-  private ingredients: Ingredient[] = [
-    new Ingredient('apples', 5),
-    new Ingredient('tomatoes', 10)
-  ];
+  // private ingredients: Ingredient[] = [
+  //   new Ingredient('apples', 5),
+  //   new Ingredient('tomatoes', 10)
+  // ];
+  private ingredients: Ingredient[] = [];
 
   clearIngredients() {
     this.ingredients = [];
