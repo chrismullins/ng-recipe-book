@@ -7,7 +7,6 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-@Injectable()
 export class RecipeService {
   // recipeSelected = new EventEmitter<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
@@ -38,13 +37,6 @@ export class RecipeService {
 
   getRecipes(): Recipe[] {
     return this.recipes.slice(); // returns a copy
-  }
-
-  addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    // for (let ingredient of ingredients) {
-    //   this.shoppingListService.addIngredient(ingredient);
-    // }
-    this.shoppingListService.addIngredients(ingredients);
   }
 
   addRecipe(recipe: Recipe) {
@@ -80,6 +72,6 @@ export class RecipeService {
   //   return this.http.put('https://ng-recipe-book-b0c9e.firebaseio.com/data.json', this.recipes);
   // }
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor() { }
 
 }
