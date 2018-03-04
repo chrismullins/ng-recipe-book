@@ -7,6 +7,9 @@ import {Store} from '@ngrx/store';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
 import {Ingredient} from '../../shared/ingredient.model';
 import * as fromApp from '../../store/app.reducers';
+import * as fromRecipe from '../store/recipe.reducers';
+import * as RecipeActions from '../store/recipe.actions';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -16,11 +19,16 @@ import * as fromApp from '../../store/app.reducers';
   // providers: [ShoppingListService]
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe: Recipe;
+  recipeState: Observable<fromRecipe.State>;
   id: number;
 
   onAddToShoppingList() {
-    this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    // this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    this.store.select('recipes')
+      .take(1)
+      .subscribe((recipeState: fromRecipe.State) => {
+        this.store.dispatch(new ShoppingListActions.AddIngredients(recipeState.recipes[this.id].ingredients));
+      });
   }
 
   onEditClicked() {
@@ -28,7 +36,8 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
+    // this.recipeService.deleteRecipe(this.id);
+    this.store.dispatch(new RecipeActions.DeleteRecipe(this.id));
     this.router.navigate(['..'], {relativeTo: this.route})
   }
 
@@ -36,13 +45,14 @@ export class RecipeDetailComponent implements OnInit {
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
               private router: Router,
-              private store: Store<fromApp.AppState>) { }
+              private store: Store<fromRecipe.FeatureState>) { }
 
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        this.recipe = this.recipeService.getRecipeById(this.id)}
+        this.recipeState = this.store.select('recipes');
+      }
     );
   }
 
