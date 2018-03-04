@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot} from '@angular/router';
-import {AuthService} from './auth.service';
 import {Observable} from 'rxjs/Observable';
 import * as fromApp from '../store/app.reducers';
 import * as fromAuth from './store/auth.reducers';
