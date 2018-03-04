@@ -1,13 +1,9 @@
-import {EventEmitter, Injectable} from '@angular/core';
 import {Recipe} from './recipes/recipe.model';
 import {Ingredient} from './shared/ingredient.model';
 import {Subject} from 'rxjs/Subject';
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 export class RecipeService {
-  // recipeSelected = new EventEmitter<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
@@ -30,46 +26,14 @@ export class RecipeService {
     )
   ];
 
-  getRecipeById(id: number): Recipe {
-    return this.recipes[id];
-  }
-
   getRecipes(): Recipe[] {
     return this.recipes.slice(); // returns a copy
-  }
-
-  addRecipe(recipe: Recipe) {
-    this.recipes.push(recipe);
-    this.recipesChanged.next(this.recipes.slice());
-  }
-
-  updateRecipe(index: number, newRecipe: Recipe) {
-    this.recipes[index] = newRecipe;
-    this.recipesChanged.next(this.recipes.slice());
-  }
-
-  deleteRecipe(index: number) {
-    this.recipes.splice(index, 1);
-    this.recipesChanged.next(this.recipes.slice());
   }
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
   }
-
-  // saveRecipes(): Observable<any> {
-  //   // this.http.put('https://ng-recipe-book-b0c9e.firebaseio.com/data.json', this.recipes).map(
-  //   //   (response: Response) => {
-  //   //     return response.json();
-  //   //   }
-  //   // ).catch(
-  //   //   (error: Response) => {
-  //   //     return Observable.throw('Something went wrong');
-  //   //   }
-  //   // );
-  //   return this.http.put('https://ng-recipe-book-b0c9e.firebaseio.com/data.json', this.recipes);
-  // }
 
   constructor() { }
 
