@@ -9,7 +9,9 @@ import {Store} from '@ngrx/store';
 export class AuthGuardService implements CanActivate, CanLoad {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.store.select('auth').map((authState: fromAuth.State) => {
+    return this.store.select('auth')
+      .take(1)
+      .map((authState: fromAuth.State) => {
       return authState.authenticated
     });
   }
