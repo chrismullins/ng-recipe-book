@@ -27,7 +27,7 @@ import {environment} from '../environments/environment';
     ErrorPageComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'my-universal-app'}),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
